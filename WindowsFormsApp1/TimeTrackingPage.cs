@@ -98,7 +98,7 @@ namespace WindowsFormsApp1
         private void LoadEmployeeData()
         {
             string connectionString = "server=localhost\\SQLEXPRESS;Initial Catalog=FerganiMuhasebeDB;Integrated Security=True";
-            string query = "SELECT id, name FROM employee_table";
+            string query = "SELECT id, name FROM employee_table where is_active = 1";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

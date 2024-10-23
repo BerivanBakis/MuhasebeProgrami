@@ -171,7 +171,7 @@ WHERE MONTH(w.date) = {selectedMonth} ";
         private void LoadEmployeeData()
         {
             string connectionString = "server=localhost\\SQLEXPRESS;Initial Catalog=FerganiMuhasebeDB;Integrated Security=True";
-            string query = "SELECT id, name FROM employee_table";
+            string query = "SELECT id, name FROM employee_table where is_active = 1";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -337,49 +337,6 @@ WHERE MONTH(w.date) = {selectedMonth} ";
             // Veritabanı bağlantısını ve sorguyu güncelle
             VeritabanıBaglanti();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            WorkFlowPage workFlowPage = new WorkFlowPage();
-            workFlowPage.FormClosed += (s, args) => { this.Show(); };
-            workFlowPage.Show();
-        }
-
-        private void btnpuantaj_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            TimeTrackingPage timetracking = new TimeTrackingPage();
-            timetracking.FormClosed += (s, args) => { this.Show(); };
-            timetracking.Show();
-        }
-
-        private void btnavans_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            AdvancePage advance = new AdvancePage();
-            advance.FormClosed += (s, args) => { this.Show(); };
-            advance.Show();
-        }
-
-        private void btnpersonel_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            EmployeeInformationPage employeeInformationPage = new EmployeeInformationPage();
-            employeeInformationPage.FormClosed += (s, args) => { this.Show(); };
-            employeeInformationPage.Show();
-        }
-
-        private void btnhakedis_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Hakedis hakedisPage = new Hakedis();
-            hakedisPage.FormClosed += (s, args) => { this.Show(); };
-            hakedisPage.Show();
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
     }
 }
