@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Cari;
 
 namespace WindowsFormsApp1
 {
@@ -81,6 +82,17 @@ namespace WindowsFormsApp1
             hakedis.Dock = DockStyle.Fill;
             panel3.Controls.Add(hakedis);
             hakedis.Show();
+        }
+
+        private void firmTransaction_Click(object sender, EventArgs e)
+        {
+            panel3.Controls.Clear();
+            FirmTransaction firmTransaction = new FirmTransaction();
+            firmTransaction.TopLevel = false;
+            firmTransaction.FormBorderStyle = FormBorderStyle.None;
+            firmTransaction.Dock = DockStyle.Fill;
+            panel3.Controls.Add(firmTransaction);
+            firmTransaction.Show();
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
