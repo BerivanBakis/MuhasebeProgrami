@@ -30,14 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Anasayfa));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnHakedis = new Guna.UI2.WinForms.Guna2Button();
             this.btnEmployyeInf = new Guna.UI2.WinForms.Guna2Button();
             this.btnAdvance = new Guna.UI2.WinForms.Guna2Button();
             this.btnTimeTracking = new Guna.UI2.WinForms.Guna2Button();
             this.btnWorkflow = new Guna.UI2.WinForms.Guna2Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.firmTransaction = new Guna.UI2.WinForms.Guna2Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -46,6 +47,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
             this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.firmTransaction);
             this.panel1.Controls.Add(this.btnHakedis);
             this.panel1.Controls.Add(this.btnEmployyeInf);
             this.panel1.Controls.Add(this.btnAdvance);
@@ -57,6 +59,25 @@
             this.panel1.Size = new System.Drawing.Size(275, 827);
             this.panel1.TabIndex = 9;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.Controls.Add(this.panel2);
+            this.panel4.Location = new System.Drawing.Point(22, 28);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(232, 100);
+            this.panel4.TabIndex = 11;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Location = new System.Drawing.Point(13, 14);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 74);
+            this.panel2.TabIndex = 10;
             // 
             // btnHakedis
             // 
@@ -148,16 +169,6 @@
             this.btnWorkflow.Text = "İŞ AKIŞI";
             this.btnWorkflow.Click += new System.EventHandler(this.btnWorkflow_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Location = new System.Drawing.Point(13, 14);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 74);
-            this.panel2.TabIndex = 10;
-            // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -167,14 +178,23 @@
             this.panel3.TabIndex = 10;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // panel4
+            // firmTransaction
             // 
-            this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Controls.Add(this.panel2);
-            this.panel4.Location = new System.Drawing.Point(22, 28);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(232, 100);
-            this.panel4.TabIndex = 11;
+            this.firmTransaction.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.firmTransaction.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.firmTransaction.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.firmTransaction.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.firmTransaction.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.firmTransaction.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.firmTransaction.FillColor = System.Drawing.Color.White;
+            this.firmTransaction.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.firmTransaction.ForeColor = System.Drawing.Color.Black;
+            this.firmTransaction.Location = new System.Drawing.Point(22, 455);
+            this.firmTransaction.Name = "firmTransaction";
+            this.firmTransaction.Size = new System.Drawing.Size(232, 44);
+            this.firmTransaction.TabIndex = 0;
+            this.firmTransaction.Text = "CARİ TAKİP";
+            this.firmTransaction.Click += new System.EventHandler(this.firmTransaction_Click);
             // 
             // Anasayfa
             // 
@@ -202,5 +222,6 @@
         private Guna.UI2.WinForms.Guna2Button btnTimeTracking;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private Guna.UI2.WinForms.Guna2Button firmTransaction;
     }
 }

@@ -281,41 +281,56 @@ namespace WindowsFormsApp1
             Microsoft.Office.Interop.Excel.Workbook xlWbook = xlapp.Workbooks.Add();
             Microsoft.Office.Interop.Excel.Worksheet xlsheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWbook.Worksheets[1];
 
-            // Sütun isimlerini Excel'e metin olarak yazma
+            // DataGridView başlıklarını Excel'e aktarma ve biçimlendirme
             for (int j = 0; j < dataGridView1.Columns.Count; j++)
             {
-                xlsheet.Cells[1, j + 1] = "'" + dataGridView1.Columns[j].HeaderText; // Sütun başlığını metin olarak yaz
-            }
+                xlsheet.Cells[1, j + 1].NumberFormat = "@"; // Metin formatı
+                xlsheet.Cells[1, j + 1] = dataGridView1.Columns[j].HeaderText;
 
-            //ilk satırın rengini değiştirme
-            var headerRange = xlsheet.Range[xlsheet.Cells[1, 1], xlsheet.Cells[1, dataGridView1.Columns.Count]];
-            headerRange.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightBlue); // Örnek renk
+                // Başlık hücresinin arka plan rengini turuncu yapma
+                xlsheet.Cells[1, j + 1].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Orange);
+
+                // Sütun genişliğini ayarlama
+                xlsheet.Columns[j + 1].ColumnWidth = 8;
+            }
 
             // DataGridView'daki verileri Excel'e aktarma
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 for (int j = 0; j < dataGridView1.Columns.Count; j++)
                 {
-                    xlsheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value; // 2. satırdan itibaren veri yaz
+                    xlsheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
                 }
             }
 
+            // Tablo oluşturma
+            var tableRange = xlsheet.Range[xlsheet.Cells[1, 1], xlsheet.Cells[dataGridView1.Rows.Count + 1, dataGridView1.Columns.Count]];
+            var listObject = xlsheet.ListObjects.Add(
+                Microsoft.Office.Interop.Excel.XlListObjectSourceType.xlSrcRange,
+                tableRange,
+                Type.Missing,
+                Microsoft.Office.Interop.Excel.XlYesNoGuess.xlYes, // Doğru kullanımı
+                Type.Missing);
+            listObject.Name = "DataGridViewTable";
+            listObject.TableStyle = "TableStyleMedium9"; // Tablo stilini ayarlama
+
             string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
-            string fileName = "WorkflowData.xlsx";
+            string fileName = "Puantaj.xlsx";
             string fullPath = System.IO.Path.Combine(downloadsPath, fileName);
 
-            // Dosya var mı kontrol et ve ismi değiştir
-            int count = 1;
+            // Dosya var mı kontrol et ve gerekiyorsa isimlendirmeyi ayarla
+            int fileIndex = 1;
             while (System.IO.File.Exists(fullPath))
             {
-                fullPath = System.IO.Path.Combine(downloadsPath, $"WorkflowData ({count}).xlsx");
-                count++;
+                fullPath = System.IO.Path.Combine(downloadsPath, $"Puantaj ({fileIndex}).xlsx");
+                fileIndex++;
             }
 
             // Excel dosyasını kaydetme
             xlWbook.SaveAs(fullPath);
             xlWbook.Close();
             xlapp.Quit();
+
             MessageBox.Show("Excel dosyası indirilenler klasörüne kaydedildi: " + fullPath);
         }
 

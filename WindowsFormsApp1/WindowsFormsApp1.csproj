@@ -64,6 +64,12 @@
     <Compile Include="Anasayfa.Designer.cs">
       <DependentUpon>Anasayfa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cari\FirmTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cari\FirmTransaction.Designer.cs">
+      <DependentUpon>FirmTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hakedis.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Anasayfa.resx">
       <DependentUpon>Anasayfa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cari\FirmTransaction.resx">
+      <DependentUpon>FirmTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeInformationPage.resx">
       <DependentUpon>EmployeeInformationPage.cs</DependentUpon>

@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
         SqlCommand komut;
         SqlDataAdapter da;
         String workflowId;
+        private string sqlQuery = "";
         public WorkFlowPage()
         {
             InitializeComponent();
@@ -30,7 +31,12 @@ namespace WindowsFormsApp1
             baglanti = new SqlConnection("server=localhost\\SQLEXPRESS;Initial Catalog=FerganiMuhasebeDB;Integrated Security=True");
 
             baglanti.Open();
-            da = new SqlDataAdapter("SELECT w.id, e.name, w.stage, w.project, w.job_description, w.start_time, w.end_time, w.date FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id ORDER BY w.date DESC;", baglanti);
+            if (sqlQuery.Length == 0)
+            {
+                sqlQuery = "SELECT w.id, e.name, w.stage, w.project, w.job_description, w.start_time, w.end_time, w.date FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id ORDER BY w.id DESC;";
+            }
+
+            da = new SqlDataAdapter(sqlQuery, baglanti);
             DataTable tablo = new DataTable();
             da.Fill(tablo);
             dataGridView1.DataSource = tablo;
@@ -100,7 +106,89 @@ namespace WindowsFormsApp1
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                workflowId = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                txtAsama.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                txtProje.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                txtGorevTanimi.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                girisSaati.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+                cikisSaati.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+                tarih.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+
+                string employeeName = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+
+                // Combobox'taki öğeleri kontrol et
+                foreach (var item in cmbxEmployee.Items)
+                {
+                    if (((dynamic)item).Text == employeeName)
+                    {
+                        cmbxEmployee.SelectedItem = item; // Seçilen öğeyi combobox'ta göster
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        private void cikisSaati_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbxEmployee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbxEmployee.SelectedItem != null)
+            {
+                // Seçilen çalışanın id'sini al
+                string employeeId = ((dynamic)cmbxEmployee.SelectedItem).Value.ToString();
+            }
+        }
+
+        private void girisSaati_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void girisSaati_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+            {
+                e.SuppressKeyPress = true; // Tab tuşunun varsayılan işlevini engelle
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
+
+        private void cikisSaati_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
+
+        // Diğer inputlar için de aynı şekilde devam et
+        private void txtAsama_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
+
+        private void txtProje_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
         {
             string sorgu = "DELETE from workflow_table where id=@id";
             komut = new SqlCommand(sorgu, baglanti);
@@ -119,7 +207,7 @@ namespace WindowsFormsApp1
             VeritabanıBaglanti();
         }
 
-        private void ekle_Click(object sender, EventArgs e)
+        private void btnEkle_Click(object sender, EventArgs e)
         {
             string employeeId = ((dynamic)cmbxEmployee.SelectedItem).Value.ToString();
             string sorgu = "INSERT INTO workflow_table(employee_id, stage, project, job_description, start_time, end_time, date, end_date) VALUES (@employee_id, @asama, @proje, @gorevTanimi, @girisSaati, @cikisSaati, @tarih, @end_date)";
@@ -158,8 +246,9 @@ namespace WindowsFormsApp1
             VeritabanıBaglanti();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnGuncelle_Click(object sender, EventArgs e)
         {
+
             string employeeId = ((dynamic)cmbxEmployee.SelectedItem).Value.ToString();
             string sorgu = "UPDATE workflow_table SET employee_id=@employee_id, stage=@asama, project=@proje, job_description=@gorevTanimi, start_time=@girisSaati, end_time=@cikisSaati, date=@tarih, end_date=@end_date WHERE id=@id";
             komut = new SqlCommand(sorgu, baglanti);
@@ -208,113 +297,78 @@ namespace WindowsFormsApp1
             VeritabanıBaglanti();
         }
 
-        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridView1.CurrentRow != null)
-            {
-                workflowId = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                txtAsama.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                txtProje.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-                txtGorevTanimi.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-                girisSaati.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
-                cikisSaati.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
-                tarih.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
-
-                string employeeName = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-
-                // Combobox'taki öğeleri kontrol et
-                foreach (var item in cmbxEmployee.Items)
-                {
-                    if (((dynamic)item).Text == employeeName)
-                    {
-                        cmbxEmployee.SelectedItem = item; // Seçilen öğeyi combobox'ta göster
-                        break;
-                    }
-                }
-            }
-        }
-
-
-        private void cikisSaati_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbxEmployee_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbxEmployee.SelectedItem != null)
-            {
-                // Seçilen çalışanın id'sini al
-                string employeeId = ((dynamic)cmbxEmployee.SelectedItem).Value.ToString();
-            }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnExcel_Click(object sender, EventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application xlapp = new Microsoft.Office.Interop.Excel.Application();
             xlapp.Visible = false;
             Microsoft.Office.Interop.Excel.Workbook xlWbook = xlapp.Workbooks.Add();
             Microsoft.Office.Interop.Excel.Worksheet xlsheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWbook.Worksheets[1];
 
+            // DataGridView başlıklarını Excel'e aktarma ve biçimlendirme
+            for (int j = 0; j < dataGridView1.Columns.Count; j++)
+            {
+                xlsheet.Cells[1, j + 1] = dataGridView1.Columns[j].HeaderText;
+
+                // Başlık hücresinin arka plan rengini turuncu yapma
+                xlsheet.Cells[1, j + 1].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Orange);
+
+                // Sütun genişliğini ayarlama
+                xlsheet.Columns[j + 1].ColumnWidth = 18;
+            }
+
             // DataGridView'daki verileri Excel'e aktarma
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 for (int j = 0; j < dataGridView1.Columns.Count; j++)
                 {
-                    xlsheet.Cells[i + 1, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                    xlsheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
                 }
             }
+
+            // Tablo oluşturma
+            var tableRange = xlsheet.Range[xlsheet.Cells[1, 1], xlsheet.Cells[dataGridView1.Rows.Count + 1, dataGridView1.Columns.Count]];
+            var listObject = xlsheet.ListObjects.Add(
+                Microsoft.Office.Interop.Excel.XlListObjectSourceType.xlSrcRange,
+                tableRange,
+                Type.Missing,
+                Microsoft.Office.Interop.Excel.XlYesNoGuess.xlYes, // Doğru kullanımı
+                Type.Missing);
+            listObject.Name = "DataGridViewTable";
+            listObject.TableStyle = "TableStyleMedium9"; // Tablo stilini ayarlama
+
             string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
             string fileName = "WorkflowData.xlsx";
             string fullPath = System.IO.Path.Combine(downloadsPath, fileName);
+
+            // Dosya var mı kontrol et ve gerekiyorsa isimlendirmeyi ayarla
+            int fileIndex = 1;
+            while (System.IO.File.Exists(fullPath))
+            {
+                fullPath = System.IO.Path.Combine(downloadsPath, $"WorkflowData ({fileIndex}).xlsx");
+                fileIndex++;
+            }
 
             // Excel dosyasını kaydetme
             xlWbook.SaveAs(fullPath);
             xlWbook.Close();
             xlapp.Quit();
+
             MessageBox.Show("Excel dosyası indirilenler klasörüne kaydedildi: " + fullPath);
         }
 
-        private void girisSaati_ValueChanged(object sender, EventArgs e)
+        private void btnFiltrele_Click(object sender, EventArgs e)
         {
+            string selectedEmployee = ((dynamic)cmbxEmployee.SelectedItem)?.Text.ToString();
 
-        }
-        private void girisSaati_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab)
+            string query = "SELECT w.id, e.name, w.stage, w.project, w.job_description, w.start_time, w.end_time, w.date FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id  WHERE 1=1 ";
+
+            if (!string.IsNullOrEmpty(selectedEmployee))
             {
-                e.SuppressKeyPress = true; // Tab tuşunun varsayılan işlevini engelle
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                query += " AND e.name = '" + selectedEmployee + "' ORDER BY w.id DESC ";
             }
-        }
 
-        private void cikisSaati_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab)
-            {
-                e.SuppressKeyPress = true;
-                this.SelectNextControl((Control)sender, true, true, true, true);
-            }
+            sqlQuery = query;
+            VeritabanıBaglanti();
         }
-
-        // Diğer inputlar için de aynı şekilde devam et
-        private void txtAsama_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab)
-            {
-                e.SuppressKeyPress = true;
-                this.SelectNextControl((Control)sender, true, true, true, true);
-            }
-        }
-
-        private void txtProje_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab)
-            {
-                e.SuppressKeyPress = true;
-                this.SelectNextControl((Control)sender, true, true, true, true);
-            }
-        }
-
     }
 }

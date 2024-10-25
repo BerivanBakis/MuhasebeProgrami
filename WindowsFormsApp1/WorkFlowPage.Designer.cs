@@ -41,12 +41,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cikisSaati = new System.Windows.Forms.DateTimePicker();
-            this.btnEkle = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnSil = new System.Windows.Forms.Button();
-            this.btnGuncelle = new System.Windows.Forms.Button();
             this.cmbxEmployee = new System.Windows.Forms.ComboBox();
-            this.btnExcel = new System.Windows.Forms.Button();
+            this.btnEkle = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSil = new Guna.UI2.WinForms.Guna2Button();
+            this.btnGuncelle = new Guna.UI2.WinForms.Guna2Button();
+            this.btnFiltrele = new Guna.UI2.WinForms.Guna2Button();
+            this.btnExcel = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -186,27 +187,13 @@
             this.cikisSaati.TabIndex = 3;
             this.cikisSaati.ValueChanged += new System.EventHandler(this.cikisSaati_ValueChanged);
             // 
-            // btnEkle
-            // 
-            this.btnEkle.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnEkle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnEkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnEkle.ForeColor = System.Drawing.Color.White;
-            this.btnEkle.Location = new System.Drawing.Point(943, 27);
-            this.btnEkle.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEkle.Name = "btnEkle";
-            this.btnEkle.Size = new System.Drawing.Size(187, 53);
-            this.btnEkle.TabIndex = 4;
-            this.btnEkle.Text = "Ekle";
-            this.btnEkle.UseVisualStyleBackColor = false;
-            this.btnEkle.Click += new System.EventHandler(this.ekle_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(35, 253);
             this.dataGridView1.Name = "dataGridView1";
@@ -219,38 +206,6 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEnter);
             // 
-            // btnSil
-            // 
-            this.btnSil.BackColor = System.Drawing.Color.Firebrick;
-            this.btnSil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSil.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSil.ForeColor = System.Drawing.Color.White;
-            this.btnSil.Location = new System.Drawing.Point(943, 92);
-            this.btnSil.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(187, 53);
-            this.btnSil.TabIndex = 4;
-            this.btnSil.Text = "Sil";
-            this.btnSil.UseVisualStyleBackColor = false;
-            this.btnSil.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnGuncelle
-            // 
-            this.btnGuncelle.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnGuncelle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnGuncelle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuncelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGuncelle.ForeColor = System.Drawing.Color.White;
-            this.btnGuncelle.Location = new System.Drawing.Point(943, 157);
-            this.btnGuncelle.Margin = new System.Windows.Forms.Padding(0);
-            this.btnGuncelle.Name = "btnGuncelle";
-            this.btnGuncelle.Size = new System.Drawing.Size(187, 53);
-            this.btnGuncelle.TabIndex = 4;
-            this.btnGuncelle.Text = "Güncelle";
-            this.btnGuncelle.UseVisualStyleBackColor = false;
-            this.btnGuncelle.Click += new System.EventHandler(this.button2_Click);
-            // 
             // cmbxEmployee
             // 
             this.cmbxEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -261,17 +216,92 @@
             this.cmbxEmployee.TabIndex = 6;
             this.cmbxEmployee.SelectedIndexChanged += new System.EventHandler(this.cmbxEmployee_SelectedIndexChanged);
             // 
+            // btnEkle
+            // 
+            this.btnEkle.BackColor = System.Drawing.Color.White;
+            this.btnEkle.BorderColor = System.Drawing.Color.Transparent;
+            this.btnEkle.BorderRadius = 10;
+            this.btnEkle.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnEkle.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnEkle.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnEkle.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnEkle.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.btnEkle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnEkle.ForeColor = System.Drawing.Color.White;
+            this.btnEkle.Location = new System.Drawing.Point(950, 17);
+            this.btnEkle.Name = "btnEkle";
+            this.btnEkle.Size = new System.Drawing.Size(180, 45);
+            this.btnEkle.TabIndex = 8;
+            this.btnEkle.Text = "EKLE";
+            this.btnEkle.Click += new System.EventHandler(this.btnEkle_Click);
+            // 
+            // btnSil
+            // 
+            this.btnSil.BorderRadius = 10;
+            this.btnSil.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSil.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSil.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSil.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSil.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.btnSil.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnSil.ForeColor = System.Drawing.Color.White;
+            this.btnSil.Location = new System.Drawing.Point(950, 70);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(180, 45);
+            this.btnSil.TabIndex = 8;
+            this.btnSil.Text = "SİL";
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
+            // 
+            // btnGuncelle
+            // 
+            this.btnGuncelle.BorderRadius = 10;
+            this.btnGuncelle.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuncelle.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnGuncelle.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnGuncelle.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnGuncelle.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.btnGuncelle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnGuncelle.ForeColor = System.Drawing.Color.White;
+            this.btnGuncelle.Location = new System.Drawing.Point(950, 121);
+            this.btnGuncelle.Name = "btnGuncelle";
+            this.btnGuncelle.Size = new System.Drawing.Size(180, 45);
+            this.btnGuncelle.TabIndex = 8;
+            this.btnGuncelle.Text = "GÜNCELLE";
+            this.btnGuncelle.Click += new System.EventHandler(this.btnGuncelle_Click);
+            // 
+            // btnFiltrele
+            // 
+            this.btnFiltrele.BorderRadius = 10;
+            this.btnFiltrele.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnFiltrele.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnFiltrele.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnFiltrele.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnFiltrele.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
+            this.btnFiltrele.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnFiltrele.ForeColor = System.Drawing.Color.White;
+            this.btnFiltrele.Location = new System.Drawing.Point(950, 172);
+            this.btnFiltrele.Name = "btnFiltrele";
+            this.btnFiltrele.Size = new System.Drawing.Size(180, 45);
+            this.btnFiltrele.TabIndex = 9;
+            this.btnFiltrele.Text = "FİLTRELE";
+            this.btnFiltrele.Click += new System.EventHandler(this.btnFiltrele_Click);
+            // 
             // btnExcel
             // 
-            this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(81)))));
-            this.btnExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnExcel.BorderRadius = 10;
+            this.btnExcel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnExcel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnExcel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnExcel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnExcel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(111)))), ((int)(((byte)(66)))));
+            this.btnExcel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnExcel.ForeColor = System.Drawing.Color.White;
             this.btnExcel.Location = new System.Drawing.Point(35, 185);
             this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(179, 51);
-            this.btnExcel.TabIndex = 7;
-            this.btnExcel.Text = "Excel Dosyası";
-            this.btnExcel.UseVisualStyleBackColor = false;
-            this.btnExcel.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnExcel.Size = new System.Drawing.Size(180, 45);
+            this.btnExcel.TabIndex = 10;
+            this.btnExcel.Text = "EXCEL DOSYASI";
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // WorkFlowPage
             // 
@@ -279,11 +309,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1167, 892);
             this.Controls.Add(this.btnExcel);
-            this.Controls.Add(this.cmbxEmployee);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnFiltrele);
             this.Controls.Add(this.btnGuncelle);
             this.Controls.Add(this.btnSil);
             this.Controls.Add(this.btnEkle);
+            this.Controls.Add(this.cmbxEmployee);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cikisSaati);
             this.Controls.Add(this.girisSaati);
             this.Controls.Add(this.label8);
@@ -321,11 +352,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker cikisSaati;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnSil;
-        private System.Windows.Forms.Button btnGuncelle;
-        private System.Windows.Forms.Button btnEkle;
         private System.Windows.Forms.ComboBox cmbxEmployee;
-        private System.Windows.Forms.Button btnExcel;
+        private Guna.UI2.WinForms.Guna2Button btnEkle;
+        private Guna.UI2.WinForms.Guna2Button btnSil;
+        private Guna.UI2.WinForms.Guna2Button btnGuncelle;
+        private Guna.UI2.WinForms.Guna2Button btnFiltrele;
+        private Guna.UI2.WinForms.Guna2Button btnExcel;
     }
 }
 
