@@ -328,8 +328,7 @@ WHERE MONTH(w.date) = {selectedMonth} ";
         {
 
         }
-
-        private void btnFilter_Click(object sender, EventArgs e)
+        private void btnFilter_Click_1(object sender, EventArgs e)
         {
             // DateTimePicker'ten seçilen ayı al
             int selectedMonth = dateTimePicker1.Value.Month;
@@ -337,6 +336,5 @@ WHERE MONTH(w.date) = {selectedMonth} ";
             // Veritabanı bağlantısını ve sorguyu güncelle
             VeritabanıBaglanti();
         }
-        
     }
 }

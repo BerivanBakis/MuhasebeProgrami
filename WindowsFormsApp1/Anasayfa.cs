@@ -20,13 +20,20 @@ namespace WindowsFormsApp1
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            //panel3.Controls.Clear();
+            //WorkFlowPage workflowPage = new WorkFlowPage();
+            //workflowPage.TopLevel = false;
+            //workflowPage.FormBorderStyle = FormBorderStyle.None;
+            //workflowPage.Dock = DockStyle.Fill;
+            //panel3.Controls.Add(workflowPage);
+            //workflowPage.Show();
             panel3.Controls.Clear();
-            WorkFlowPage workflowPage = new WorkFlowPage();
-            workflowPage.TopLevel = false;
-            workflowPage.FormBorderStyle = FormBorderStyle.None;
-            workflowPage.Dock = DockStyle.Fill;
-            panel3.Controls.Add(workflowPage);
-            workflowPage.Show();
+            FirmTransaction firmTransaction = new FirmTransaction();
+            firmTransaction.TopLevel = false;
+            firmTransaction.FormBorderStyle = FormBorderStyle.None;
+            firmTransaction.Dock = DockStyle.Fill;
+            panel3.Controls.Add(firmTransaction);
+            firmTransaction.Show();
         }
 
         private void btnWorkflow_Click(object sender, EventArgs e)

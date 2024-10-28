@@ -222,46 +222,6 @@ namespace WindowsFormsApp1
             sqlQuery = query;
             VeritabanıBaglanti();
         }
-
-
-        private void btnTimeTracking_Click(object sender, EventArgs e)
-        {
-            WorkFlowPage workFlowPage = new WorkFlowPage();
-            workFlowPage.FormClosed += (s, args) => { Application.Exit(); };
-            this.Close();
-            workFlowPage.Show();
-        }
-
-        private void btnpuantaj_Click_1(object sender, EventArgs e)
-        {
-            TimeTrackingPage timetracking = new TimeTrackingPage();
-            timetracking.FormClosed += (s, args) => { Application.Exit(); };
-            this.Close();
-            timetracking.Show();
-        }
-
-        private void btnavans_Click_1(object sender, EventArgs e)
-        {
-            AdvancePage advance = new AdvancePage();
-            advance.FormClosed += (s, args) => { Application.Exit(); };
-            this.Close();
-            advance.Show();
-        }
-
-        private void btnpersonel_Click_1(object sender, EventArgs e)
-        {
-            EmployeeInformationPage employeeInformationpage = new EmployeeInformationPage();
-            employeeInformationpage.FormClosed += (s, args) => { Application.Exit(); };
-            this.Close();
-            employeeInformationpage.Show();
-        }
-
-        private void btnhakedis_Click_1(object sender, EventArgs e)
-        {
-            Hakedis hakedispage = new Hakedis();
-            hakedispage.FormClosed += (s, args) => { Application.Exit(); };
-            this.Close();
-            hakedispage.Show();
-        }
+       
     }
 }

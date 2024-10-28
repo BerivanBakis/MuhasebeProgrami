@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             baglanti.Open();
             if (sqlQuery.Length == 0)
             {
-                sqlQuery = "SELECT w.id, e.name, w.stage, w.project, w.job_description, w.start_time, w.end_time, w.date FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id ORDER BY w.id DESC;";
+                sqlQuery = "SELECT w.id, e.name AS [İSİM], w.stage AS [AŞAMA], w.project AS [PROJE], w.job_description AS [İŞ TANIMI], w.start_time AS [BAŞLAMA], w.end_time AS [BİTİŞ], w.date AS [TARİH] FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id ORDER BY w.id DESC;";
             }
 
             da = new SqlDataAdapter(sqlQuery, baglanti);
@@ -360,7 +360,7 @@ namespace WindowsFormsApp1
         {
             string selectedEmployee = ((dynamic)cmbxEmployee.SelectedItem)?.Text.ToString();
 
-            string query = "SELECT w.id, e.name, w.stage, w.project, w.job_description, w.start_time, w.end_time, w.date FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id  WHERE 1=1 ";
+            string query = "SELECT w.id,e.name AS [İSİM], w.stage AS [AŞAMA], w.project AS [PROJE], w.job_description AS [İŞ TANIMI], w.start_time AS [BAŞLAMA], w.end_time AS [BİTİŞ], w.date AS [TARİH]  FROM workflow_table w JOIN employee_table e ON w.employee_id = e.id  WHERE 1=1 ";
 
             if (!string.IsNullOrEmpty(selectedEmployee))
             {
@@ -369,6 +369,11 @@ namespace WindowsFormsApp1
 
             sqlQuery = query;
             VeritabanıBaglanti();
+        }
+
+        private void txtProje_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
